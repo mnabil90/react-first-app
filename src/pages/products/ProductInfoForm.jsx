@@ -167,7 +167,7 @@ const ProductInfoForm = props => {
             
                <Grid container spacing={2}>
                   <Grid item xs={12}>
-                  <Box
+                  <Box 
                   display="grid"
                   gap="30px"
                   gridTemplateColumns="repeat(4, minmax(0, 1fr))"
