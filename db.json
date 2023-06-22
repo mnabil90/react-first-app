@@ -1,0 +1,22 @@
+{
+  "products": [
+    {
+      "id": 2,
+      "productName": "Pepsi",
+      "productPrice": 5,
+      "quantity": 2
+    },
+    {
+      "id": 3,
+      "productName": "Chicken wings",
+      "productPrice": 30,
+      "quantity": 0
+    },
+    {
+      "id": 4,
+      "productName": "Choc",
+      "productPrice": "5",
+      "quantity": 0
+    }
+  ]
+}
