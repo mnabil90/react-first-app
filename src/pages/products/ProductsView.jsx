@@ -11,11 +11,11 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { green, red } from '@mui/material/colors';
-import { useNavigate } from 'react-router-dom';
 import ProductInfoForm from './ProductInfoForm';
 import { deleteProduct ,loadProducts, patchProduct} from '../../api/products';
 import { toast } from 'react-toastify';
+import { useTheme } from '@emotion/react';
+import { tokens } from '../../theme';
 
 
 
@@ -26,7 +26,8 @@ const initialProducts = [
 ];
 
 function ProductsView(props) {
-    const navigate = useNavigate();
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
     const [state, setState] = useState({ 
         selectedId : null,
         selectedRow :[],
@@ -95,13 +96,6 @@ function ProductsView(props) {
     .catch(error => {
         console.log(error);
     });
-
-
-
-
-
-
-    
   }
   
   const calculateProductsTotal = function(){
@@ -118,17 +112,17 @@ function ProductsView(props) {
     return (
       <GridToolbarContainer>
         <Box sx={{ flexGrow: 1 }}>
-        <IconButton color="primary" aria-label="Add User" component="label" onClick={handleAddAction} sx={{ backgroundColor: 'green' }}>
+        <IconButton color="primary" aria-label="Add User" component="label" onClick={handleAddAction} sx={{ backgroundColor: colors.greenAccent[500] }}>
             <AddIcon />
         </IconButton>
-        <IconButton color="primary" aria-label="Edit User" component="label" onClick={handleEditAction} sx={{ backgroundColor: 'green' }}>
+        <IconButton color="primary" aria-label="Edit User" component="label" onClick={handleEditAction} sx={{ backgroundColor: colors.greenAccent[500]}}>
             <EditIcon/>
         </IconButton>
-        <IconButton color="primary" aria-label="Edit User" component="label" onClick={handleDeleteAction} sx={{ backgroundColor: 'red' }}>
+        <IconButton color="primary" aria-label="Edit User" component="label" onClick={handleDeleteAction} sx={{ backgroundColor: colors.redAccent[500] }}>
             <DeleteIcon/>
         </IconButton>
         </Box>
-        <IconButton color="primary" aria-label="Refresh Grid" component="label" onClick={loadProductsData} sx={{ backgroundColor: 'green'}}>
+        <IconButton color="primary" aria-label="Refresh Grid" component="label" onClick={loadProductsData} sx={{ backgroundColor: colors.greenAccent[500]}}>
             <RefreshIcon />
         </IconButton>
       </GridToolbarContainer>
@@ -147,9 +141,11 @@ const loadProductsData = () =>{
         console.log(error);
     });
 }
+
 const handleAddAction = () => {
   setState({...state, operationType: 'ADD' ,showForm : true});
 }
+
 const handleEditAction = () => {
   setState({...state, operationType: 'EDIT',showForm : true});
 }
@@ -159,15 +155,11 @@ const handleDeleteAction = () => {
       deleteProduct(state.selectedId)
       .then(response => {
           toast("Product Deleted Successfully");
-         // setState({...state, selectedId: null, selectedRow: []});
           loadProductsData();
       })
       .catch(error => {
           console.log(error);
       });
-      /*setState({...state, selectedId: null, selectedRow: [],
-          data:state.data.filter(ele=>  ele.id != state.selectedId)
-      });*/
     }
 }
 
@@ -200,24 +192,24 @@ const handleClose = () => {
             fontSize : 'large'
           },
           "& .name-column--cell": {
-            color: '#2e7c67',
+            color: colors.greenAccent[300],
           },
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: '#007bff',
+            backgroundColor: colors.blueAccent[700],
             borderBottom: "none",
           },
           "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: '#f2f0f0',
+            backgroundColor: colors.primary[400],
           },
           "& .MuiDataGrid-footerContainer": {
             borderTop: "none",
-            backgroundColor: '#007bff',
+            backgroundColor: colors.blueAccent[700],
           },
           "& .MuiCheckbox-root": {
-            color: `#2e7c67 !important`,
+            color: `${colors.greenAccent[200]} !important`,
           },
           "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-            color: `#141414 !important`,
+            color: `${colors.grey[100]} !important`,
           },
         }}
       >

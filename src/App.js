@@ -4,15 +4,20 @@ import { useState } from 'react';
 import Button from './Button';
 
 import { BrowserRouter, Route ,Routes } from 'react-router-dom';
+import {ColorModeContext,useMode} from './theme';
+import { CssBaseline,ThemeProvider } from '@mui/material';
+
 import Home from './pages/Home';
 import About from './pages/About';
 import ResponsiveNavBar from './pages/global/Navbar';
 import ProductsView from './pages/products/ProductsView';
 
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+  const [theme,colorMode] = useMode();
   const [cartState,setCartState] = useState({
     totalAmount:0,
     totalQuantity:0
@@ -21,6 +26,9 @@ function App() {
   return (
     
     <>
+      <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+      <CssBaseline/>
       <ToastContainer position='bottom-center' />
       <BrowserRouter>
          <ResponsiveNavBar cartState={cartState}/>
@@ -37,6 +45,9 @@ function App() {
           
         </Routes>
       </BrowserRouter>
+      
+      </ThemeProvider>
+    </ColorModeContext.Provider>
       {/*<ProductTotal productsTotal={productsTotal}/>
       <ProductsGrid calculateProductsTotal={calculateProductsTotal}/>
       {showCounter && counter.count}

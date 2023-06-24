@@ -3,31 +3,43 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
+import { useTheme } from "@mui/material";
+import { useContext } from "react";
+
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CartSummary from './CartSummary';
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+
+import { ColorModeContext, tokens } from "../../theme";
 
 const pages = ['Home', 'About', 'Cart'];
 
 function ResponsiveNavBar(props) {
   const navigate  = useNavigate();
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const colorMode = useContext(ColorModeContext);
+
   const handleNavigate = function(page){
     navigate(`/${page}`);
   }
 
   const location = useLocation();
   return (    
+
+    
     <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+    
+      <Box 
+      display="flex" 
+      borderRadius="3px"
+      backgroundColor={colors.blueAccent[400]}
+      >
+        <Toolbar disableGutters borderRadius="3px" >
           <Typography
             variant="h6"
             noWrap
@@ -75,12 +87,21 @@ function ResponsiveNavBar(props) {
               </Button>
             ))}
           </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            {location.pathname!=='/About' &&  <CartSummary cartState={props.cartState}/>}
+          <Box display="flex" m="2px" borderRadius="3px">
+             {location.pathname!=='/About' &&  <CartSummary cartState={props.cartState}/>}
+          </Box>
+          <Box display="flex" sx={{ flexGrow: 0 }}>
+            <IconButton onClick={colorMode.toggleColorMode}>
+              {theme.palette.mode === 'dark' ? (
+                <DarkModeOutlinedIcon/> 
+              ):(
+                <LightModeOutlinedIcon/> 
+              )}
+            </IconButton>  
           </Box>
         </Toolbar>
-      </Container>
+        </Box>
+      
     </AppBar>
   );
 }
