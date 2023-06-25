@@ -18,6 +18,11 @@ import { useTheme } from '@emotion/react';
 import { tokens } from '../../theme';
 
 
+import { useSelector, useDispatch } from 'react-redux';
+//import { updateCartAmount } from '../../features/CartStateSlice';
+
+import { updateCartState} from '../../actions/cartstate.actions';
+
 
 const initialProducts = [
     {id:1,productName : 'Fries',productPrice: 10,quantity: 0},
@@ -28,6 +33,13 @@ const initialProducts = [
 function ProductsView(props) {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+
+
+    const cartState = useSelector((state) => {
+      return state.cartState;
+    });
+    const dispatch = useDispatch()
+
     const [state, setState] = useState({ 
         selectedId : null,
         selectedRow :[],
@@ -100,11 +112,11 @@ function ProductsView(props) {
   
   const calculateProductsTotal = function(){
     let data = [...state.data]
-    let {totalAmount,totalQuantity} = props?.cartState;
+    let {totalAmount,totalQuantity} = cartState;
     totalAmount = data.reduce(function (acc, product) { return acc + (product.quantity*product.productPrice); }, 0);
     totalQuantity = data.reduce(function (acc, product) { return acc + product.quantity; }, 0);
 
-    props.setCartState({totalAmount,totalQuantity});
+    dispatch(updateCartState({totalAmount,totalQuantity}));
     //console.log(props.cartState)
   }
 

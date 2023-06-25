@@ -4,13 +4,13 @@
       "id": 2,
       "productName": "Pepsi",
       "productPrice": 5,
-      "quantity": 2
+      "quantity": 4
     },
     {
       "id": 3,
       "productName": "Chicken wings",
       "productPrice": 30,
-      "quantity": 0
+      "quantity": 1
     },
     {
       "id": 4,

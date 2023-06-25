@@ -1,7 +1,11 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 
 function CartSummary(props) {
-  const {totalAmount,totalQuantity} = props.cartState;
+  const cartState = useSelector((state) => {
+    return state.cartState;
+  });
+  const {totalAmount,totalQuantity} = cartState;
   return (
     <>  
        <table>
