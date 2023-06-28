@@ -19,9 +19,10 @@ import { tokens } from '../../theme';
 
 
 import { useSelector, useDispatch } from 'react-redux';
-//import { updateCartAmount } from '../../features/CartStateSlice';
+import { updateCartState } from '../../features/CartStateSlice';
+import {getAllProducts, handlePatchProduct} from '../../actions/productActions';
 
-import { updateCartState} from '../../actions/cartstate.actions';
+//import { updateCartState} from '../../actions/cartstate.actions';
 
 
 const initialProducts = [
@@ -96,18 +97,8 @@ function ProductsView(props) {
     let product= {...state.data[productIndex]}
     product.quantity = product.quantity + value;
 
-    patchProduct(product)
-    .then(response => {
-        console.log("newProducts",newProducts);
-        loadProductsData();
-        /*setState({...state, selectedId: null, selectedRow: [],
-            data:newProducts
-        });*/
-        
-    })
-    .catch(error => {
-        console.log(error);
-    });
+    let data =  dispatch(handlePatchProduct(product));
+    loadProductsData();
   }
   
   const calculateProductsTotal = function(){

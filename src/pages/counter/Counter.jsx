@@ -1,8 +1,9 @@
 import React from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { addOne, subOne, addSome, subSome, reset } from '../../actions/count.actions';
+import { addOne, subOne, addSome, subSome, reset } from '../../actions/countActions';
 
+//import { addOne, subOne, addSome, subSome, reset } from '../../features/CounterSlice';
 
 function Counter() {
     const dispatch = useDispatch()

@@ -1,4 +1,10 @@
-import { createStore } from 'redux'
-import { combineReducers } from '@reduxjs/toolkit'
+import thunk from 'redux-thunk';
+import reducers from '../reducers';
+import { createStore, applyMiddleware } from 'redux'
 
-export default createStore(CountReducer)
+const middleware = [ thunk];
+
+export const store = createStore(
+    reducers,
+    applyMiddleware(...middleware)
+)

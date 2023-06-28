@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
-import counter from './count.reducer';
-import cartState from './cartstate.reducer';
+import counter from './countReducer';
+import cartState from './cartstateReducer';
+import Product from './productReducer';
 export default combineReducers({
     counter,
-    cartState
+    cartState,
+    Product
 })

@@ -1,4 +1,4 @@
-import { UPDATE_AMOUNT } from '../actions/cartstate.actions';
+import { UPDATE_AMOUNT } from '../actions/cartstateActions';
 
 const CartStateReducer = (state = { totalQuantity: 0,totalAmount:0 }, action) => {
     switch (action.type) {

@@ -1,4 +1,4 @@
-import { ADD, SUB, ADDSOME, SUBSOME, RESET } from '../actions/count.actions'
+import { ADD, SUB, ADDSOME, SUBSOME, RESET } from '../actions/countActions'
 
 const CountReducer = (state = { count: 0 }, action) => {
     switch (action.type) {
